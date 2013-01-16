@@ -1,6 +1,0 @@
-From http://forms.hidglobal.com/driverDownloads.php?techCat=19
-OMNIKEY 5321 CL USB Reader for Linux
-
-run.sh:
-Copy directory ifdokrfid_lnx_i686-2.x.x.bundle to /usr/lib/pcsc/drivers/
-Copy cmrfid.ini to /etc/

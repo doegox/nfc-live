@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ ! -e ifdokrfid_lnx_i686-*.tar.gz ]; then
-  echo "Omnikey_driver: Error missing archive ifdokrfid_lnx_i686-*.tar.gz, see howto.txt"
+  echo "Omnikey_driver: Error missing archive ifdokrfid_lnx_i686-*.tar.gz, please run prepare.sh first"
   exit 1
 fi
 mkdir -p ../@config/includes.chroot/etc/
