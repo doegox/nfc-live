@@ -1,0 +1,69 @@
+--- MOBIB-Extractor.py	2009-03-20 12:23:52.000000000 +0100
++++ MOBIB-Extractor.py	2013-01-09 00:46:20.029923995 +0100
+@@ -220,54 +220,9 @@
+ 		
+ 		# Acquisition of a dump
+ 		if input == None:
+-			self.r=readers()
+-			# If there is no reader connected
+-			if self.r == []:
+-				tkMessageBox.showerror("Reader problem","No reader connected !", icon='error')
+-				self.readerError = True
+-				return	
+-			# If the 2 readers (ACR122 and ACR38) are connected
+-			self.lecteur = 0
+-			if len(self.r) > 1:
+-				for i in range(len(self.r)):
+-					if str(self.r[i]) == "ACS ACR 38U-CCID 00 00" or str(self.r[i]) == "ACS ACR38 Smart Card Reader 00 00" or str(self.r[i]) == "ACS ACR38U 00 00":
+-						self.lecteur = self.lecteur + 1
+-				if self.lecteur == 2 :
+-					tkMessageBox.showerror("Reader problem","Please connect only ONE reader (ACR122 or ACR38) !", icon='error')
+-					self.readerError = True
+-					return	
+-			# Detect the reader
+-			self.activation = 0
+-			self.lecteur = 0
+-			for i in range(len(self.r)):
+-				if str(self.r[i]) == "ACS ACR 38U-CCID 00 00" and self.activation == 0:
+-					self.activation = 1
+-					os.system('./pymobibACR122.py > dump.txt')
+-				elif str(self.r[i]) == "ACS ACR38 Smart Card Reader 00 00" and self.activation == 0:
+-					self.activation = 1
+-					os.system('./pymobibACR38.py > dump.txt')
+-				elif str(self.r[i]) == "ACS ACR38U 00 00" and self.activation == 0:
+-					self.activation = 1
+-					os.system('./pymobibACR38.py > dump.txt')
+-				else:
+-					if i == len(self.r)-1 and self.activation == 0:
+-						tkMessageBox.showerror("Reader problem","No supported reader connected !", icon='error')
+-						self.readerError = True
+-						return
+-						
+-			fs = open("dump.txt", 'r')
+-			fs.readline()
+-			fs.readline()
+-			temp = fs.readline()
+-			# If there is no card on the reader
+-			if temp == '' or temp[0] == "N":
+-				self.readError = True
+-				return 
+-			fs.close()
+-			self.readDump("dump.txt")
+-		# Reading a dump	
+-		else:
+-			self.readDump(input)
++			os.system('ReadMobib.sh > /tmp/dump.txt')
++			input = "/tmp/dump.txt"
++		self.readDump(input)
+ 			
+ 		# Data Treatment
+ 		self.processICC()
+@@ -410,6 +365,8 @@
+ 			self.type = 'Mr'
+ 		elif bin_type == '10':
+ 			self.type = 'Mrs'
++		elif bin_type == '00':
++			self.type = 'Mr/Mrs'
+ 		print "Name : %s %s\n"%(self.type,self.name)
+ 
+ 		## Birthday

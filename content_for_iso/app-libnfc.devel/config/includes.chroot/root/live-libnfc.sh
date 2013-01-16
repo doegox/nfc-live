@@ -6,6 +6,11 @@ cd libnfc-dev
 debian/rules binary
 mkdir -p /tmp/TRANSFER/app-libnfc.generated/config/includes.chroot/etc/modprobe.d
 cp contrib/linux/blacklist-libnfc.conf /tmp/TRANSFER/app-libnfc.generated/config/includes.chroot/etc/modprobe.d
+mkdir -p /tmp/TRANSFER/app-libnfc.generated/config/includes.chroot/usr/local/bin/
+cp examples/pn53x-tamashell-scripts/ReadMobib.sh /tmp/TRANSFER/app-libnfc.generated/config/includes.chroot/usr/local/bin/
+chmod 755 /tmp/TRANSFER/app-libnfc.generated/config/includes.chroot/usr/local/bin/ReadMobib.sh
+cp examples/pn53x-tamashell-scripts/ReadNavigo.sh /tmp/TRANSFER/app-libnfc.generated/config/includes.chroot/usr/local/bin/
+chmod 755 /tmp/TRANSFER/app-libnfc.generated/config/includes.chroot/usr/local/bin/ReadNavigo.sh
 cd ..
 dpkg -i libnfc*deb
 mkdir -p /tmp/TRANSFER/app-libnfc.generated/config/packages.chroot
