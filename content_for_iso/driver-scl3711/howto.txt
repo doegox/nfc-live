@@ -1,5 +1,0 @@
-From http://www.identive-infrastructure.com/support_tmp/download.php?file=latestLinSCL37xx
-From http://www.identive-infrastructure.com/products-solutions/smart-card-readers-a-terminals/contactless-readers/scl3711#downloads
-
-run.sh:
-Copy directory scx371x_2.x_linux_32bit.tar.gz/proprietary/SCx371x.bundle to /usr/lib/pcsc/drivers/

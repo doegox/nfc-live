@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ ! -e scx371x_*_linux_32bit.tar.gz ]; then
-  echo "SCL3711_driver: Error missing archive scx371x_*_linux_32bit.tar.gz, see howto.txt"
+  echo "SCL3711_driver: Error missing archive scx371x_*_linux_32bit.tar.gz, please run prepare.sh first"
   exit 1
 fi
 mkdir -p ../@config/includes.chroot/usr/lib/pcsc/drivers/
