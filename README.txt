@@ -81,10 +81,22 @@ Next times:
 
 Updates:
 --------
-* check prepare.sh and config/includes.chroot/root/live-*.sh scripts
+* Update prepare.sh and config/includes.chroot/root/live-*.sh scripts
   to fetch a more recent revision if needed
 * content_for_iso/*/clean.sh to remove fetched data
 * content_for_iso/*/prepare.sh to fetch data again
 For *.devel, just execute again the live-*.sh in live system
 to create a new *.generated config
+
+Exceptions and special cases:
+-----------------------------
+* content_for_iso/app-proxmark3fw
+  Proxmark firmwares require a toolchain
+  See content_for_iso/app-proxmark3fw/howto.txt
+* content_for_iso/doc-readme
+  It's a general readme file that will end up on the Desktop
+* content_for_iso/doc-USBROOT
+  Whatever is put in content_for_iso/doc-USBROOT/config/includes.binary
+  will be directly available on the ISO without booting the live system
+
 

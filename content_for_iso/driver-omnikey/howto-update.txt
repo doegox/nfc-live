@@ -1,6 +1,0 @@
-Fetch driver from http://forms.hidglobal.com/driverDownloads.php?techCat=19
-=> OMNIKEY 5321 CL USB Reader
-=> Linux
-=> accept license
-Final URL intercepted in Firefox Live HTTP Headers...
-=> update prepare.sh
