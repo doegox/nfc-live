@@ -1,0 +1,6 @@
+subversion
+automake
+libtool
+pkg-config
+libusb-dev
+

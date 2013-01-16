@@ -1,0 +1,7 @@
+user: user
+password: live
+
+root access via sudo:
+$ sudo su -
+
+Once booted, this directory is accessible via /live/image/

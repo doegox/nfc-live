@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd live || exit 1
+sudo lb clean
+sudo rm -rf config

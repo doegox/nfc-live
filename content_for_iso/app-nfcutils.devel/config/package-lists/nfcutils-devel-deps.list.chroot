@@ -1,0 +1,7 @@
+subversion
+build-essential
+debhelper
+dh-autoreconf
+pkg-config
+automake
+libtool

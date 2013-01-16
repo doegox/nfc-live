@@ -1,0 +1,10 @@
+git
+build-essential
+debhelper
+dh-autoreconf
+pkg-config
+automake
+libtool
+libreadline-dev
+libusb-dev
+libpcsclite-dev

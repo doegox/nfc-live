@@ -1,0 +1,41 @@
+--- src/rfid_layer2_iso15693.c	2010-03-11 19:02:54.000000000 +0100
++++ src/rfid_layer2_iso15693.c	2010-03-11 19:08:57.000000000 +0100
+@@ -45,12 +45,14 @@
+ 	struct iso15693_request head;
+ 	u_int64_t uid;
+ 	u_int8_t blocknum;
++	u_int8_t nrblocks;
+ 	u_int8_t data[0];
+ } __attribute__ ((packed));
+ 
+ struct iso15693_request_block_selected {
+ 	struct iso15693_request head;
+ 	u_int8_t blocknum;
++	u_int8_t nrblocks;
+ 	u_int8_t data[0];
+ } __attribute__ ((packed));
+ 
+@@ -166,7 +168,7 @@
+ 
+ 	rx_len = sizeof(resp);
+ 
+-	tx_req.sel.head.command = ISO15693_CMD_READ_BLOCK_SINGLE;
++	tx_req.sel.head.command = ISO15693_CMD_READ_BLOCK_MULTI;
+ 
+ 	if (handle->priv.iso15693.vicc_fast){
+ 		tx_req.sel.head.flags |= RFID_15693_F_RATE_HIGH;
+@@ -183,12 +185,14 @@
+ 	if (handle->priv.iso15693.state==RFID_15693_STATE_SELECTED) {
+ 		tx_len = sizeof(struct iso15693_request_block_selected);
+ 		tx_req.sel.blocknum = blocknr;
++		tx_req.sel.nrblocks = 0;
+ 		tx_req.sel.head.flags |= RFID_15693_F4_SELECTED;
+ 	} else {
+ 		tx_len = sizeof(struct iso15693_request_block_addressed);
+ 		memcpy(&tx_req.addr.uid, handle->uid, ISO15693_UID_LEN);
+ 		tx_req.addr.head.flags |= RFID_15693_F4_ADDRESS;
+ 		tx_req.addr.blocknum = blocknr;
++		tx_req.addr.nrblocks = 0;
+ 	}
+ 
+ 	//DEBUGP("sizeof: addr: %d sel:%d\n",sizeof(struct iso15693_request_read_addressed),sizeof(struct iso15693_request_read_selected));

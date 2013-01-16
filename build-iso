@@ -1,0 +1,36 @@
+#!/bin/bash
+
+HOSTNAME="nfc-live"
+ISO_APPLICATION="Debian Live NFC"
+ISO_PUBLISHER="Phil Teuwen;http://wiki.yobi.be/wiki/RFID;yobibe@gmail.com"
+SUPPORT=iso-hybrid
+DISTRO=wheezy
+ARCH=i386
+MIRROR="http://ftp.be.debian.org/debian/"
+
+cd live || exit 1
+sudo lb clean
+rm -rf config
+
+# bootappend-live: see man live-boot & live-config
+lb config \
+  --clean \
+  --cache true \
+  --binary-images $SUPPORT \
+  --mode debian \
+  --distribution $DISTRO \
+  --architectures $ARCH \
+  --mirror-bootstrap $MIRROR \
+  --mirror-binary "$MIRROR" \
+  --iso-application "$ISO_APPLICATION" \
+  --iso-publisher "$ISO_PUBLISHER" \
+  --bootappend-live "boot=live config hostname=$HOSTNAME" \
+  --apt-recommends false \
+  --archive-areas "main contrib non-free" \
+  --firmware-chroot true
+
+sudo rsync -av ../content_for_iso/@config/ config
+sudo chown -R root:root config/includes.chroot
+sudo chown -R 1000:1000 config/includes.chroot/home/user
+sudo chmod +x config/includes.chroot/usr/local/bin/*
+sudo lb build

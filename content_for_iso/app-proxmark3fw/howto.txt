@@ -1,0 +1,30 @@
+Compile FW:
+===========
+see http://code.google.com/p/proxmark3/wiki/Compiling#Linux_Platform
+
+Toolchain:
+----------
+sudo aptitude install build-essential libreadline5 libreadline-dev libusb-0.1-4 libusb-dev libqt4-dev perl pkg-config
+tools/install-gnuarm4.sh ~/devel/00arm `pwd`/tmp
+
+#export ARMLIB=~/devel/00arm/lib/gcc/arm-elf/4.3.3/interwork
+export LIBGCC=~/devel/00arm/lib/gcc/arm-eabi/4.3.3/interwork/libgcc.a
+export PATH=${PATH}:~/devel/00arm/bin/
+You can also append such lines to your ~/.bashrc so that they apply every time you login.
+
+With my toolchain I've to change common/Makefile.common:
+-CROSS  ?= arm-none-eabi-
++CROSS  ?= arm-eabi-
+
+Compile:
+--------
+make clean
+make
+
+New firmware:
+-------------
+bootrom/obj/bootrom.elf
+armsrc/obj/fullimage.elf
+=> e.g.:
+config/includes.chroot/root/proxmark3/firmware_r638/bootrom.elf
+config/includes.chroot/root/proxmark3/firmware_r638/fullimage.elf

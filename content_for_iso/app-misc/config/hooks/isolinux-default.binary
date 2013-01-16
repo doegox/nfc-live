@@ -1,0 +1,3 @@
+#!/bin/sh
+sed -i -e 's|timeout 0|timeout 50|' binary/isolinux/isolinux.cfg
+sed -i -e '/menu default/d;/(686-pae)/a\\tmenu default' binary/isolinux/live.cfg

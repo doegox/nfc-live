@@ -1,0 +1,1 @@
+Whatever is put into includes.binary will be directly available from the USB/CDROM without having to boot it

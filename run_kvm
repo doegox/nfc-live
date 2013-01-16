@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# apt-get install qemu-kvm
+kvm -cdrom live/binary.hybrid.iso
+# To try it as HDD image (must be RW)
+#kvm -hda live/binary.hybrid.iso
+
+# attempts to use USB, fails with timeouts
+#   -usbdevice "host:04e6:5591"
+# other attempt: see "kvm -device usb-host,?"
+#   -usb -device usb-host,vendorid=0x04e6,productid=0x5591

@@ -1,0 +1,5 @@
+subversion
+build-essential
+make
+libreadline6-dev libusb-dev libqt4-dev
+pkg-config

@@ -1,0 +1,2 @@
+python python-pyscard python-imaging python-serial python-crypto
+libssl1.0.0

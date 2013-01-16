@@ -1,0 +1,12 @@
+
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=root xterm
+Comment=
+Categories=Application;
+Exec=sudo -i xterm -class UXTerm -title uxterm -u8
+Icon=xfce-terminal
+Terminal=false
+StartupNotify=false

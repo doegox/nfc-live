@@ -1,0 +1,2 @@
+Disabled to avoid conflict with SCL3711 driver, see config/includes.chroot/root/live-ifdnfc.sh
+

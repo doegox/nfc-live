@@ -1,0 +1,4 @@
+From http://www.rf-dump.org/downloads.shtml
+Packaged for Debian: apt-get install rfdump
+Run it once and save preferences file created -> /root/.config/rfdump.ini
+

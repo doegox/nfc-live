@@ -1,0 +1,6 @@
+openssh-client openssh-server sshfs
+cu mc evince screen less leafpad iceweasel
+socat vbindiff bsdiff
+xserver-xorg-video-all
+opensc
+plotutils

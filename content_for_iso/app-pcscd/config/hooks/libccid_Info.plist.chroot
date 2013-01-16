@@ -1,0 +1,15 @@
+#!/bin/bash
+
+/usr/bin/patch -p0 <<EOF
+--- /etc/libccid_Info.plist	2012-06-22 12:15:27.000000000 +0000
++++ /etc/libccid_Info.plist	2013-01-09 20:48:43.408959907 +0000
+@@ -52,7 +52,7 @@
+ 	-->
+ 
+ 	<key>ifdDriverOptions</key>
+-	<string>0x0000</string>
++	<string>0x0005</string>
+ 
+ 	<!-- Possible values for ifdDriverOptions
+ 	1: DRIVER_OPTION_CCID_EXCHANGE_AUTHORIZED
+EOF

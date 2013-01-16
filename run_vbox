@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# You've first to create an empty VBox image and bind the iso to it,
+# then change the UUID below:
+/usr/lib/virtualbox/VirtualBox --comment "NFC-Live" \
+  --startvm "09bb0df6-b826-4720-a402-17145cf8b85c" &
