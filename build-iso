@@ -11,7 +11,7 @@ MIRROR="http://ftp.be.debian.org/debian/"
 
 cd live || exit 1
 sudo lb clean
-rm -rf config
+sudo rm -rf config
 
 # bootappend-live: see man live-boot & live-config
 lb config \

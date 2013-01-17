@@ -35,8 +35,8 @@ build-iso
           => create fresh live-boot config, import config items
              created by add.sh and build iso
 build-clean
-          => clean live-boot config, but keeps cache
-             you've to delete live/cache manually if you want to remove it
+          => clean live-boot config, bootstrap cache, but keeps cached debs
+             you've to delete live/cache manually if you want to remove them
 run_kvm
           => run generated ISO in qemu-kvm
 run_vbox
