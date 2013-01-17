@@ -2,7 +2,7 @@
 
 REVISION=88ec1f6ea593de3c0ffb23f38a0216ed23ef7a1b
 
-git clone --depth 1 --branch for_libnfc_170 https://github.com/doegox/RFIDIOt.git
+git clone --depth 1 --branch devel https://github.com/doegox/RFIDIOt.git
 cd RFIDIOt
 git checkout $REVISION
 mkdir -p ../config/includes.chroot
