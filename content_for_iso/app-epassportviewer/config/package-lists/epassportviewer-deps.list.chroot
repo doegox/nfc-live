@@ -1,4 +1,5 @@
 python python-pyscard python-pyasn1 python-tk python-imaging python-imaging-tk python-crypto python-reportlab
 openssl
-
+libjpeg62
+openjdk-6-jre-headless
 
