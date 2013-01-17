@@ -27,4 +27,4 @@ rsync -av config/ ../@config
 EOF
 chmod 755 /tmp/TRANSFER/driver-ifdnfc.generated/add.sh
 # Avoid conflict with SCL3711 driver:
-sed -i -e '/0x04E6/d;/0x5591/d;/SCL3711/d' /tmp/TRANSFER/driver-ifdnfc.generated/config/includes.chroot/usr/lib/pcsc/drivers/ifdnfc.bundle/Contents/Info.plist
+sed -i -e '/0x04E6\|0x5591\|SCL3711/s/\(.*\)/<!-- \1 -->/' /tmp/TRANSFER/driver-ifdnfc.generated/config/includes.chroot/usr/lib/pcsc/drivers/ifdnfc.bundle/Contents/Info.plist
