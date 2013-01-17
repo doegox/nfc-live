@@ -70,6 +70,17 @@ python /usr/local/lib/ePassportViewer-2.0/ePassportViewer.py
 EOF
 chmod 755 config/includes.chroot/usr/local/bin/ePassportViewer
 
+# JOHN DOE history
+cat > config/includes.chroot/tmp/ePV-history << EOF
+(lp0
+(S'DOE JOHN'
+p1
+S'EH123456<0BEL7001017M1301162<<<<<<<<<<<<<<02'
+p2
+tp3
+a.
+EOF
+
 # pypassport doc
 #mkdir -p config/includes.chroot/home/user/Desktop/docs/applications/epassportviewer
 #wget -nc http://pypassport.googlecode.com/files/pypassport-1.0-doc.zip
