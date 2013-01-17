@@ -1,8 +1,11 @@
 #!/bin/bash
 
+REVISION=2fbf5ab7416954592c7d8edc8651677c28c632bc
+
 git clone http://code.google.com/p/libnfc/ libnfc-dev
 
 cd libnfc-dev
+git checkout $REVISION
 debian/rules binary
 mkdir -p /tmp/TRANSFER/app-libnfc.generated/config/includes.chroot/etc/modprobe.d
 cp contrib/linux/blacklist-libnfc.conf /tmp/TRANSFER/app-libnfc.generated/config/includes.chroot/etc/modprobe.d

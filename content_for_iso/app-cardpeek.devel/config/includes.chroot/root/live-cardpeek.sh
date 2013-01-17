@@ -1,6 +1,8 @@
 #!/bin/bash
 
-svn export http://cardpeek.googlecode.com/svn/trunk/ cardpeek-dev
+REVISION=208
+
+svn export -r $REVISION http://cardpeek.googlecode.com/svn/trunk/ cardpeek-dev
 cd cardpeek-dev
 ./configure
 make

@@ -1,7 +1,10 @@
 #!/bin/bash
 
+REVISION=05391dc2ca23fcfaf8cd8109151c033fef1b70d4
+
 git clone http://code.google.com/p/ifdnfc/ ifdnfc-dev
 cd ifdnfc-dev
+git checkout $REVISION
 autoreconf -vis
 ./configure
 make

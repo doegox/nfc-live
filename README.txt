@@ -17,11 +17,12 @@ content_for_iso/
   doc-*       => documentations
   driver-*    => drivers
   @config/    => will contain the chosen config
-Each of those subdirectories contains the following scripts:
-    add.sh        => to add the corresponding item to the to-be-generated ISO
-    prepare.sh    => occasionally a first step has to be performed
+Each of those subdirectories contains (some of) the following scripts:
+     add.sh       => to add the corresponding item to the to-be-generated ISO
+(opt)prepare.sh   => occasionally a first step has to be performed
                      before running add.sh to download required pieces
-    clean.sh      => to clean data fetched by prepare.sh
+(opt)clean.sh     => to clean data fetched by prepare.sh
+(opt)live-*.sh    => will be used in live system to generate binaries
 Some subdirectories are special:
   *.devel     => they don't install directly the software but a script to be
                  run from the ISO to download and compile the software 
@@ -81,7 +82,7 @@ Next times:
 
 Updates:
 --------
-* Update prepare.sh and config/includes.chroot/root/live-*.sh scripts
+* Update prepare.sh and live-*.sh scripts
   to fetch a more recent revision if needed
 * content_for_iso/*/clean.sh to remove fetched data
 * content_for_iso/*/prepare.sh to fetch data again
@@ -98,5 +99,3 @@ Exceptions and special cases:
 * content_for_iso/doc-USBROOT
   Whatever is put in content_for_iso/doc-USBROOT/config/includes.binary
   will be directly available on the ISO without booting the live system
-
-

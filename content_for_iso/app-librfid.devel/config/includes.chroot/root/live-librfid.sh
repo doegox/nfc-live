@@ -1,6 +1,8 @@
 #!/bin/bash
 
-svn export http://svn.gnumonks.org/trunk/librfid/ librfid-dev
+REVISION=2107
+
+svn export -r $REVISION http://svn.gnumonks.org/trunk/librfid/ librfid-dev
 cd librfid-dev
 autoreconf -vis
 ./configure --enable-ccid --disable-shared --prefix=/tmp/TRANSFER/app-librfid.generated/config/includes.chroot/usr/local/

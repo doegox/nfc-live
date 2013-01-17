@@ -1,7 +1,10 @@
 #!/bin/bash
 
+REVISION=8885aaa94c6a80283fddc7712783bd44dbf3de27
+
 git clone http://code.google.com/p/libfreefare/ libfreefare-dev
 cd libfreefare-dev
+git checkout $REVISION
 # MAX_FRAME_SIZE hack
 patch -p1 < ../libfreefare-DF_max_buffer_size_hack.diff
 autoreconf -vis

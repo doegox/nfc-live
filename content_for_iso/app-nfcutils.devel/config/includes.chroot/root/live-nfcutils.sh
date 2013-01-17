@@ -1,7 +1,9 @@
 #!/bin/bash
 
+REVISION=1116
+
 # nfcutils
-svn export http://nfc-tools.googlecode.com/svn/trunk/nfcutils nfcutils-dev
+svn export -r $REVISION http://nfc-tools.googlecode.com/svn/trunk/nfcutils nfcutils-dev
 cd nfcutils-dev
 autoreconf -vis
 debian/rules binary

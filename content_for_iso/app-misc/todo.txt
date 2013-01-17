@@ -1,2 +1,0 @@
-sniff-pn53x.sh script should be taken from svn
-Be careful that it has usbutils dependency

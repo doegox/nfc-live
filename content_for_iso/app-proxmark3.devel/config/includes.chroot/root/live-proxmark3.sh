@@ -1,6 +1,8 @@
 #!/bin/bash
 
-svn export http://proxmark3.googlecode.com/svn/trunk/ proxmark3-dev
+REVISION=638
+
+svn export -r $REVISION http://proxmark3.googlecode.com/svn/trunk/ proxmark3-dev
 cd proxmark3-dev
 make client
 mkdir -p /tmp/TRANSFER/app-proxmark3.generated/config/includes.chroot/root/proxmark3/tools
