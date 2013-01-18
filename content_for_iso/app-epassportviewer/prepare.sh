@@ -56,7 +56,22 @@ patch -p0 <<EOF
          self.f.write(data)
      def read(self,data): pass
 EOF
+# do not rehash CSCA
+patch -p0 <<EOF
+--- epassportviewer/dialog.py	2012-09-24 15:07:45.000000000 +0200
++++ epassportviewer/dialog.py	2013-01-18 02:01:59.784412116 +0100
+@@ -769,7 +769,7 @@
+                 
+                 try:
+                     if configManager().getOption('Options','certificate'):
+-                        self.doc.setCSCADirectory(configManager().getOption('Options','certificate'), True)
++                        self.doc.setCSCADirectory(configManager().getOption('Options','certificate'), False)
+                     certif = self.doc.doVerifySODCertificate()
+                     if not configManager().getOption('Options','certificate'):
+                         certif = "CA_NOT_SET"
+EOF
 cd -
+tar xzf certificates.tgz -C config/includes.chroot/usr/local/lib/ePassportViewer-2.0/epassportviewer/ressources/
 tar xzf download/ePassportViewer-$VERSION.tar.gz --strip-components=2 -C config/includes.chroot/usr/local/lib/ePassportViewer-2.0 ePassportViewer-2.0.14/pypassport-2.0/pypassport
 
 # cleaning
@@ -80,6 +95,25 @@ S'EH123456<0BEL7001017M1301162<<<<<<<<<<<<<<02'
 p2
 tp3
 a.
+EOF
+cat > config/includes.chroot/tmp/ePV-config.ini << EOF
+[Security]
+aa = 1
+pa = 1
+
+[Options]
+certificate = /usr/local/lib/ePassportViewer-2.0/epassportviewer/ressources/certificates
+driver = PcscReader
+openssl = openssl
+reader = Auto
+path = 
+disclamer = 0
+
+[Logs]
+api = 1
+apdu = 1
+sm = 1
+bac = 1
 EOF
 
 # pypassport doc
