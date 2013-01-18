@@ -4,9 +4,9 @@
 
 # epassportviewer 2.0.14
 VERSION=2.0.14
-wget -nc -O ePassportViewer-$VERSION.tar.gz "http://ge.tt/api/1/files/6Exz0YO/2/blob?download"
+wget -nc -O download/ePassportViewer-$VERSION.tar.gz "http://ge.tt/api/1/files/6Exz0YO/2/blob?download"
 mkdir -p config/includes.chroot/usr/local/lib
-tar xzf ePassportViewer-$VERSION.tar.gz --strip-components=1 -C config/includes.chroot/usr/local/lib ePassportViewer-2.0.14/ePassportViewer-2.0
+tar xzf download/ePassportViewer-$VERSION.tar.gz --strip-components=1 -C config/includes.chroot/usr/local/lib ePassportViewer-2.0.14/ePassportViewer-2.0
 rm -rf config/includes.chroot/usr/local/lib/ePassportViewer-2.0/geojasper
 # patch upper()
 cd config/includes.chroot/usr/local/lib/ePassportViewer-2.0
@@ -57,7 +57,7 @@ patch -p0 <<EOF
      def read(self,data): pass
 EOF
 cd -
-tar xzf ePassportViewer-$VERSION.tar.gz --strip-components=2 -C config/includes.chroot/usr/local/lib/ePassportViewer-2.0 ePassportViewer-2.0.14/pypassport-2.0/pypassport
+tar xzf download/ePassportViewer-$VERSION.tar.gz --strip-components=2 -C config/includes.chroot/usr/local/lib/ePassportViewer-2.0 ePassportViewer-2.0.14/pypassport-2.0/pypassport
 
 # cleaning
 find config/includes.chroot/usr/local/lib/ePassportViewer-2.0 -name "*.pyc" -or -name "*~" -exec rm {} \;
@@ -71,6 +71,7 @@ EOF
 chmod 755 config/includes.chroot/usr/local/bin/ePassportViewer
 
 # JOHN DOE history
+mkdir -p config/includes.chroot/tmp
 cat > config/includes.chroot/tmp/ePV-history << EOF
 (lp0
 (S'DOE JOHN'
@@ -83,14 +84,14 @@ EOF
 
 # pypassport doc
 #mkdir -p config/includes.chroot/home/user/Desktop/docs/applications/epassportviewer
-#wget -nc http://pypassport.googlecode.com/files/pypassport-1.0-doc.zip
+#wget -nc -P download http://pypassport.googlecode.com/files/pypassport-1.0-doc.zip
 # epassportviewer doc
-#unzip -d config/includes.chroot/home/user/Desktop/docs/applications/epassportviewer pypassport-1.0-doc.zip
-#wget -nc -P config/includes.chroot/home/user/Desktop/docs/applications/epassportviewer http://epassportviewer.googlecode.com/files/epassportviewer-0.2c.manual.pdf
+#unzip -d config/includes.chroot/home/user/Desktop/docs/applications/epassportviewer download/pypassport-1.0-doc.zip
+#wget -nc -P download http://epassportviewer.googlecode.com/files/epassportviewer-0.2c.manual.pdf
+#cp -a download/epassportviewer-0.2c.manual.pdf config/includes.chroot/home/user/Desktop/docs/applications/epassportviewer 
 
 # geojasper
-wget -nc http://www.dimin.net/software/geojasper/geojasper_linux32.tgz
+wget -nc -P download http://www.dimin.net/software/geojasper/geojasper_linux32.tgz
 mkdir -p config/includes.chroot/usr/local/bin
-tar xzf geojasper_linux32.tgz --strip-components=1 -C config/includes.chroot/usr/local/bin geojasper/geojasper
+tar xzf download/geojasper_linux32.tgz --strip-components=1 -C config/includes.chroot/usr/local/bin geojasper/geojasper
 chmod 755 config/includes.chroot/usr/local/bin/geojasper
-

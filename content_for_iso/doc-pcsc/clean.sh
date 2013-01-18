@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rm *zip *pdf
+rm -rf download

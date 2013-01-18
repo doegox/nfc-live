@@ -1,4 +1,2 @@
-*.tar.gz
-*.tgz
-*.zip
+download/
 config/includes.chroot/
