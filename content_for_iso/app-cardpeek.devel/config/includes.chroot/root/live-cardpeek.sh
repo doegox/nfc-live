@@ -16,6 +16,7 @@ mkdir -p /tmp/TRANSFER/app-cardpeek.generated/config/includes.chroot/root/.cardp
 cp -a dot_cardpeek_dir/* /tmp/TRANSFER/app-cardpeek.generated/config/includes.chroot/root/.cardpeek
 mkdir -p /tmp/TRANSFER/app-cardpeek.generated/config/includes.chroot/etc/skel/.cardpeek
 cp -a dot_cardpeek_dir/* /tmp/TRANSFER/app-cardpeek.generated/config/includes.chroot/etc/skel/.cardpeek
+mkdir -p /tmp/TRANSFER/app-cardpeek.generated/config/package-lists
 echo "liblua5.1-0 libssl1.0.0 libgtk2.0-0" > /tmp/TRANSFER/app-cardpeek.generated/config/package-lists/cardpeek-deps.list.chroot
 cat > /tmp/TRANSFER/app-cardpeek.generated/add.sh <<EOF
 #!/bin/bash
