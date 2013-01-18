@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REVISION=638
+REVISION=649
 
 svn export -r $REVISION http://proxmark3.googlecode.com/svn/trunk/ proxmark3-dev
 cd proxmark3-dev
