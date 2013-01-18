@@ -26,7 +26,7 @@ EOF
 # fix epassportviewer temp files location
 patch -p0 <<EOF
 --- epassportviewer/const.py	2012-08-22 10:31:44.000000000 +0200
-+++ epassportviewer/const.py	2013-01-17 01:23:15.679957082 +0100
++++ epassportviewer/const.py	2013-01-18 11:54:05.221628307 +0100
 @@ -20,12 +20,12 @@
  
  # Options
@@ -34,24 +34,24 @@ patch -p0 <<EOF
 -STDERR  = 'error.log'
 -CONFIG  = 'config.ini'
 -HISTORY = 'history'
-+STDERR  = '/tmp/ePV-error.log'
-+CONFIG  = '/tmp/ePV-config.ini'
-+HISTORY = '/tmp/ePV-history'
++STDERR  = os.path.expanduser('~/ePV-error.log')
++CONFIG  = os.path.expanduser('~/.ePV-config.ini')
++HISTORY = os.path.expanduser('~/.ePV-history')
  MAX_HISTORY = 10
  TITLE   = 'ePassport Viewer'
 -LOG     = 'system.log'
-+LOG     = '/tmp/ePV-system.log'
++LOG     = os.path.expanduser('~/ePV-system.log')
  
  VERSION = '2.0'
  WEBSITE = "http://code.google.com/p/epassportviewer/"
 --- ePassportViewer.py	2012-08-09 16:56:00.000000000 +0200
-+++ ePassportViewer.py	2013-01-17 01:22:42.559357140 +0100
++++ ePassportViewer.py	2013-01-18 11:52:52.424006937 +0100
 @@ -35,7 +35,7 @@
  class dummyStream(object):
      ''' dummyStream behaves like a stream but does nothing. '''
      def __init__(self): 
 -        self.f = open('out.txt', 'w')
-+        self.f = open('/tmp/ePV-out.txt', 'w')
++        self.f = open(os.path.expanduser('~/ePV-out.txt'), 'w')
      def write(self,data): 
          self.f.write(data)
      def read(self,data): pass
@@ -74,8 +74,10 @@ cd -
 tar xzf certificates.tgz -C config/includes.chroot/usr/local/lib/ePassportViewer-2.0/epassportviewer/ressources/
 tar xzf download/ePassportViewer-$VERSION.tar.gz --strip-components=2 -C config/includes.chroot/usr/local/lib/ePassportViewer-2.0 ePassportViewer-2.0.14/pypassport-2.0/pypassport
 
-# cleaning
+# cleaning & fixing rights
 find config/includes.chroot/usr/local/lib/ePassportViewer-2.0 -name "*.pyc" -or -name "*~" -exec rm {} \;
+find config/includes.chroot/usr/local/lib/ePassportViewer-2.0 -type d -exec chmod 755 {} \;
+find config/includes.chroot/usr/local/lib/ePassportViewer-2.0 -type f -exec chmod 644 {} \;
 
 # epassportviewer helper
 mkdir -p config/includes.chroot/usr/local/bin
@@ -86,8 +88,8 @@ EOF
 chmod 755 config/includes.chroot/usr/local/bin/ePassportViewer
 
 # JOHN DOE history
-mkdir -p config/includes.chroot/tmp
-cat > config/includes.chroot/tmp/ePV-history << EOF
+mkdir -p config/includes.chroot/root config/includes.chroot/home/user
+tee config/includes.chroot/root/.ePV-history > config/includes.chroot/home/user/.ePV-history << EOF
 (lp0
 (S'DOE JOHN'
 p1
@@ -96,7 +98,8 @@ p2
 tp3
 a.
 EOF
-cat > config/includes.chroot/tmp/ePV-config.ini << EOF
+# Min config with CSCA
+tee config/includes.chroot/root/.ePV-config.ini > config/includes.chroot/home/user/.ePV-config.ini << EOF
 [Security]
 aa = 1
 pa = 1
