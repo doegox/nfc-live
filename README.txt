@@ -96,6 +96,5 @@ Exceptions and special cases:
   See content_for_iso/app-proxmark3fw/howto.txt
 * content_for_iso/doc-readme
   It's a general readme file that will end up on the Desktop
-* content_for_iso/doc-USBROOT
-  Whatever is put in content_for_iso/doc-USBROOT/config/includes.binary
+* Whatever is put in config/includes.binary
   will be directly available on the ISO without booting the live system

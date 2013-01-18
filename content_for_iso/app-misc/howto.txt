@@ -1,0 +1,2 @@
+Whatever is put into config/includes.binary will be directly available from the USB/CDROM without having to boot it
+A shortcut to the nfc-doc directory is provided on the Desktop

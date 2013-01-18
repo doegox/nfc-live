@@ -18,8 +18,8 @@ cp -a nonce2key /tmp/TRANSFER/app-proxmark3.generated/config/includes.chroot/roo
 cd -
 cp -a LICENSE.txt README.txt /tmp/TRANSFER/app-proxmark3.generated/config/includes.chroot/root/proxmark3
 cp -a client/cli client/flasher client/proxmark3 client/snooper client/unbind-proxmark /tmp/TRANSFER/app-proxmark3.generated/config/includes.chroot/root/proxmark3
-mkdir -p /tmp/TRANSFER/app-proxmark3.generated/config/includes.chroot/home/user/Desktop/docs/applications/proxmark3
-cp doc/*pdf /tmp/TRANSFER/app-proxmark3.generated/config/includes.chroot/home/user/Desktop/docs/applications/proxmark3
+mkdir -p /tmp/TRANSFER/app-proxmark3.generated/config/includes.binary/nfc-doc/applications/proxmark3
+cp doc/*pdf /tmp/TRANSFER/app-proxmark3.generated/config/includes.binary/nfc-doc/applications/proxmark3
 mkdir -p /tmp/TRANSFER/app-proxmark3.generated/config/package-lists
 cat > /tmp/TRANSFER/app-proxmark3.generated/config/package-lists/proxmark3-deps.list.chroot <<EOF
 libreadline6 libusb-0.1-4 libqtgui4

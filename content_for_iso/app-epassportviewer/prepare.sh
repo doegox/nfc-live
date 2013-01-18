@@ -88,8 +88,8 @@ EOF
 chmod 755 config/includes.chroot/usr/local/bin/ePassportViewer
 
 # JOHN DOE history
-mkdir -p config/includes.chroot/root config/includes.chroot/home/user
-tee config/includes.chroot/root/.ePV-history > config/includes.chroot/home/user/.ePV-history << EOF
+mkdir -p config/includes.chroot/root config/includes.chroot/etc/skel
+tee config/includes.chroot/root/.ePV-history > config/includes.chroot/etc/skel/.ePV-history << EOF
 (lp0
 (S'DOE JOHN'
 p1
@@ -99,7 +99,7 @@ tp3
 a.
 EOF
 # Min config with CSCA
-tee config/includes.chroot/root/.ePV-config.ini > config/includes.chroot/home/user/.ePV-config.ini << EOF
+tee config/includes.chroot/root/.ePV-config.ini > config/includes.chroot/etc/skel/.ePV-config.ini << EOF
 [Security]
 aa = 1
 pa = 1
@@ -120,12 +120,12 @@ bac = 1
 EOF
 
 # pypassport doc
-#mkdir -p config/includes.chroot/home/user/Desktop/docs/applications/epassportviewer
+#mkdir -p config/includes.binary/nfc-doc/applications/epassportviewer
 #wget -nc -P download http://pypassport.googlecode.com/files/pypassport-1.0-doc.zip
 # epassportviewer doc
-#unzip -d config/includes.chroot/home/user/Desktop/docs/applications/epassportviewer download/pypassport-1.0-doc.zip
+#unzip -d config/includes.binary/nfc-doc/applications/epassportviewer download/pypassport-1.0-doc.zip
 #wget -nc -P download http://epassportviewer.googlecode.com/files/epassportviewer-0.2c.manual.pdf
-#cp -a download/epassportviewer-0.2c.manual.pdf config/includes.chroot/home/user/Desktop/docs/applications/epassportviewer 
+#cp -a download/epassportviewer-0.2c.manual.pdf config/includes.binary/nfc-doc/applications/epassportviewer 
 
 # geojasper
 wget -nc -P download http://www.dimin.net/software/geojasper/geojasper_linux32.tgz

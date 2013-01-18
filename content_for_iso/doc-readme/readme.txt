@@ -1,1 +1,1 @@
-config/includes.chroot/home/user/Desktop/readme.txt
+config/includes.chroot/etc/skel/Desktop/readme.txt
