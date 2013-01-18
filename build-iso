@@ -3,7 +3,7 @@
 HOSTNAME="nfc-live"
 ISO_APPLICATION="Debian Live NFC"
 ISO_VOLUME="Debian live NFC $(date +%Y%m%d)"
-ISO_PUBLISHER="Phil Teuwen;http://wiki.yobi.be/wiki/RFID;yobibe@gmail.com"
+ISO_PUBLISHER="https://code.google.com/p/nfc-live"
 SUPPORT=iso-hybrid
 DISTRO=wheezy
 ARCH=i386
