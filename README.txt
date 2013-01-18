@@ -62,6 +62,8 @@ So if you added a *.devel you'll find in the generated ISO some scripts:
 /root/live-*.sh
 Execute them in the live system (e.g. within VirtualBox), it will create
 new *.generated config subdirectories in /tmp/TRANSFER/
+Because some need libnfc, execute first live-libnfc.sh if the generated package
+is not yet installed. live-libnfc.sh will install libnfc after compilation
 To avoid problems in the transfer, make a tar.gz out of /tmp/TRANSFER/
 Copy it out of the ISO, e.g. in VirtualBox you can use ssh/scp/sshfs
 to 10.0.2.2, the IP of the host
