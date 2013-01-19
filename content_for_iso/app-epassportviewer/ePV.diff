@@ -1,0 +1,262 @@
+diff -Naur -x '*.pyc' a/ePassportViewer-2.0/epassportviewer/const.py b/ePassportViewer-2.0/epassportviewer/const.py
+--- a/ePassportViewer-2.0/epassportviewer/const.py	2012-08-22 10:31:44.000000000 +0200
++++ b/ePassportViewer-2.0/epassportviewer/const.py	2013-01-19 21:53:45.436370614 +0100
+@@ -20,12 +20,14 @@
+ 
+ # Options
+ DEBUG   = True
+-STDERR  = 'error.log'
+-CONFIG  = 'config.ini'
+-HISTORY = 'history'
++CONFIG  = os.path.expanduser('~/.ePV-config.ini')
++HISTORY = os.path.expanduser('~/.ePV-history')
+ MAX_HISTORY = 10
+ TITLE   = 'ePassport Viewer'
+-LOG     = 'system.log'
++OUTFILE = os.path.expanduser('~/ePV-out.txt')
++#STDERR  = os.path.expanduser('~/ePV-error.log')
++LOG     = os.path.expanduser('~/ePV-system.log')
++TMPDIR  = os.path.expanduser('/tmp')
+ 
+ VERSION = '2.0'
+ WEBSITE = "http://code.google.com/p/epassportviewer/"
+diff -Naur -x '*.pyc' a/ePassportViewer-2.0/epassportviewer/dialog.py b/ePassportViewer-2.0/epassportviewer/dialog.py
+--- a/ePassportViewer-2.0/epassportviewer/dialog.py	2012-09-24 15:07:45.000000000 +0200
++++ b/ePassportViewer-2.0/epassportviewer/dialog.py	2013-01-19 22:53:00.964763197 +0100
+@@ -769,7 +769,7 @@
+                 
+                 try:
+                     if configManager().getOption('Options','certificate'):
+-                        self.doc.setCSCADirectory(configManager().getOption('Options','certificate'), True)
++                        self.doc.setCSCADirectory(configManager().getOption('Options','certificate'), False)
+                     certif = self.doc.doVerifySODCertificate()
+                     if not configManager().getOption('Options','certificate'):
+                         certif = "CA_NOT_SET"
+diff -Naur -x '*.pyc' a/ePassportViewer-2.0/epassportviewer/mvc.py b/ePassportViewer-2.0/epassportviewer/mvc.py
+--- a/ePassportViewer-2.0/epassportviewer/mvc.py	2012-09-18 14:34:55.000000000 +0200
++++ b/ePassportViewer-2.0/epassportviewer/mvc.py	2013-01-19 21:41:21.618895309 +0100
+@@ -543,9 +543,9 @@
+     
+     def openManual(self):
+         if os.name == "nt":
+-            os.filestart("manual.pdf")
++            os.filestart(os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "manual.pdf"))
+         elif os.name == "posix":
+-            os.system("/usr/bin/xdg-open manual.pdf")  
++            os.system("evince " + os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "manual.pdf"))
+             
+     def resetConfig(self):
+         configManager.configManager().defaultConfig(CONFIG)
+diff -Naur -x '*.pyc' a/ePassportViewer-2.0/epassportviewer/util/forge.py b/ePassportViewer-2.0/epassportviewer/util/forge.py
+--- a/ePassportViewer-2.0/epassportviewer/util/forge.py	2012-08-01 11:13:39.000000000 +0200
++++ b/ePassportViewer-2.0/epassportviewer/util/forge.py	2013-01-19 21:22:31.898440166 +0100
+@@ -16,6 +16,7 @@
+ # License along with pyPassport.
+ # If not, see <http://www.gnu.org/licenses/>.
+ 
++import os
+ import datetime
+ 
+ from pypassport import pki
+@@ -55,7 +56,7 @@
+     if id_doc == "": id_doc = "EH123456"
+     if doe == "YYYY/MM/DD": doe = datetime.date.today().strftime("%Y/%m/%d") 
+     if issuer == "": issuer = "BEL"
+-    if face_path == "": face_path = "epassportviewer/ressources/face.jpg"
++    if face_path == "": face_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "epassportviewer", "ressources", "face.jpg")
+     if country == "": country = "BEL"
+     if organisation == "": organisation = "UCL"
+     if doi == "YYYY/MM/DD": doi = None
+@@ -105,7 +106,7 @@
+         # Full name
+         if middle_name:
+             middle_name = middle_name.replace(' ', '<')
+-            full_name = surname.uppercase + "<<" + firstname.uppercase + middle_name.uppercase
++            full_name = surname.upper() + "<<" + firstname.upper() + middle_name.upper()
+             dgc.addDataObject("5F02", full_name)
+          
+         # Place of birth
+diff -Naur -x '*.pyc' a/ePassportViewer-2.0/ePassportViewer.py b/ePassportViewer-2.0/ePassportViewer.py
+--- a/ePassportViewer-2.0/ePassportViewer.py	2012-08-09 16:56:00.000000000 +0200
++++ b/ePassportViewer-2.0/ePassportViewer.py	2013-01-19 21:17:25.328892019 +0100
+@@ -35,7 +35,7 @@
+ class dummyStream(object):
+     ''' dummyStream behaves like a stream but does nothing. '''
+     def __init__(self): 
+-        self.f = open('out.txt', 'w')
++        self.f = open(OUTFILE, 'w')
+     def write(self,data): 
+         self.f.write(data)
+     def read(self,data): pass
+@@ -55,12 +55,13 @@
+     
+     root = Tk()
+     root.resizable(width = False, height = False)
+-    #TODO: Linux get error, windows not
++    #TODO: Linux get error, windows not (missing app.ico)
+     try:
+-        os.chdir(os.path.dirname(os.path.realpath(__file__)))
+-        root.iconbitmap("app.ico")
++        root.iconbitmap(os.path.join(os.path.dirname(os.path.realpath(__file__)), "app.ico"))
+     except Exception, msg:
+         pass 
++    # some files will be written temporarily in the current path:
++    os.chdir(TMPDIR)
+     # remove console on osx from http://mail.python.org/pipermail/python-list/2006-October/578318.html
+     if (sys.platform != "win32") and hasattr(sys, 'frozen'):
+         root.tk.call('console', 'hide')
+diff -Naur -x '*.pyc' a/ePassportViewer-2.0/pypassport/attacks/aaTraceability.py b/ePassportViewer-2.0/pypassport/attacks/aaTraceability.py
+--- a/ePassportViewer-2.0/pypassport/attacks/aaTraceability.py	2012-09-14 16:04:57.000000000 +0200
++++ b/ePassportViewer-2.0/pypassport/attacks/aaTraceability.py	2013-01-19 21:20:25.000143446 +0100
+@@ -189,21 +189,21 @@
+         """
+ 
+         if not os.path.exists(path): os.makedirs(path)
+-        if os.path.exists(path+"/"+filename):
++        if os.path.exists(os.path.join(path, filename)):
+             i=0
+-            while os.path.exists(path+"/"+filename+str(i)):
++            while os.path.exists(os.path.join(path, filename+str(i))):
+                 i+=1
+-            path = path+"/"+filename+str(i)
++            fullpath = os.path.join(path, filename+str(i))
+         else:
+-            path = path+"/"+filename
++            fullpath = os.path.join(path, filename)
+         
+-        with open(path, 'wb') as file_modulo:
++        with open(fullpath, 'wb') as file_modulo:
+             file_modulo.write(modulo)
+-        self.log("Modulo/Signature saved at: {0}".format(path))
++        self.log("Modulo/Signature saved at: {0}".format(fullpath))
+ 
+-        return path
++        return fullpath
+     
+-    def checkFromFile(self, highest, path="./modulo", accuracy=None):
++    def checkFromFile(self, highest, path=os.path.join(".","modulo"), accuracy=None):
+         """
+         Read a signature stored in a file (by the method self.save()) and compare it with the signature (highest)
+         If accuracy is set, the method works like the method compare()
+diff -Naur -x '*.pyc' a/ePassportViewer-2.0/pypassport/attacks/macTraceability.py b/ePassportViewer-2.0/pypassport/attacks/macTraceability.py
+--- a/ePassportViewer-2.0/pypassport/attacks/macTraceability.py	2012-09-21 11:33:23.000000000 +0200
++++ b/ePassportViewer-2.0/pypassport/attacks/macTraceability.py	2013-01-19 22:57:08.681253059 +0100
+@@ -150,22 +150,22 @@
+         @return: the path and the name of the file where the pair has been saved.
+         """
+         if not os.path.exists(path): os.makedirs(path)
+-        if os.path.exists(path+"/"+filename):
++        if os.path.exists(os.path.join(path, filename)):
+             i=0
+-            while os.path.exists(path+"/"+filename+str(i)):
++            while os.path.exists(os.path.join(path, filename+str(i))):
+                 i+=1
+-            path = path+"/"+filename+str(i)
++            fullpath = os.path.exists(os.path.join(path, filename+str(i)))
+         else:
+-            path = path+"/"+filename
++            fullpath = os.path.exists(os.path.join(path, filename))
+         
+         cmd_data = self._getPair()
+         
+-        with open(path, 'wb') as pair:
++        with open(fullpath, 'wb') as pair:
+             pair.write(cmd_data)
+ 
+-        return path
++        return fullpath
+     
+-    def checkFromFile(self, path="./pair", CO=1.7):
++    def checkFromFile(self, path=os.path.join(".", "pair"), CO=1.7):
+         """checkFromFile read a file that contains a pair and check if the pair has been capture from the passport .
+         
+         @param path: The path of the file where the pair has been saved.
+diff -Naur -x '*.pyc' a/ePassportViewer-2.0/pypassport/fingerPrint.py b/ePassportViewer-2.0/pypassport/fingerPrint.py
+--- a/ePassportViewer-2.0/pypassport/fingerPrint.py	2012-09-21 11:29:32.000000000 +0200
++++ b/ePassportViewer-2.0/pypassport/fingerPrint.py	2013-01-19 22:59:43.896065056 +0100
+@@ -63,7 +63,7 @@
+         res = {}
+         
+         res["activeAuthWithoutBac"] = False
+-        res["macTraceability"] = False
++        res["macTraceability"] = (False, "N/A")
+         res["blockAfterFail"] = False
+         res["delaySecurity"] = False
+         res["selectNull"] = "N/A"
+@@ -336,7 +336,7 @@
+             attack.setMRZ(str(self.curMRZ))
+             return attack.isVulnerable()
+         except Exception, msg:
+-            return "N/A"
++            return (False, "N/A")
+     
+     def checkDelaySecurity(self):
+         self._comm.rstConnection()
+diff -Naur -x '*.pyc' a/ePassportViewer-2.0/pypassport/jp2converter.py b/ePassportViewer-2.0/pypassport/jp2converter.py
+--- a/ePassportViewer-2.0/pypassport/jp2converter.py	2012-09-14 16:04:57.000000000 +0200
++++ b/ePassportViewer-2.0/pypassport/jp2converter.py	2013-01-19 21:18:15.345797102 +0100
+@@ -36,10 +36,10 @@
+     jp2.write(input)
+     jp2.close()
+     
+-    local = ""
+-    if (sys.platform != "win32") and os.path.isfile('geojasper/geojasper'):
+-        local = "./geojasper/"
+-    a=os.popen(local+"geojasper -f tmp.jp2 -F tmp.jpg")
++    geojasper = "geojasper"
++    if (sys.platform != "win32") and os.path.isfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'geojasper', geojasper)):
++        geojasper = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'geojasper', geojasper)
++    a=os.popen(geojasper + " -f tmp.jp2 -F tmp.jpg")
+     a.close()
+     
+     try:
+diff -Naur -x '*.pyc' a/ePassportViewer-2.0/pypassport/openssl.py b/ePassportViewer-2.0/pypassport/openssl.py
+--- a/ePassportViewer-2.0/pypassport/openssl.py	2012-09-14 16:04:57.000000000 +0200
++++ b/ePassportViewer-2.0/pypassport/openssl.py	2013-01-19 21:19:21.258989893 +0100
+@@ -134,7 +134,7 @@
+             self._toDisk("ds.cer", dsDer)
+             
+             self._opensslLocation = "java -jar "
+-            cmd = "createSod.jar --certificate ds.cer --content sodContent --keypass titus --privatekey p12 --out signed"
++            cmd = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "createSod.jar") + " --certificate ds.cer --content sodContent --keypass titus --privatekey p12 --out signed"
+             res = self._execute(cmd, True)
+             f = open("signed", "rb")
+             res = f.read()
+diff -Naur -x '*.pyc' a/ePassportViewer-2.0/pypassport/pki.py b/ePassportViewer-2.0/pypassport/pki.py
+--- a/ePassportViewer-2.0/pypassport/pki.py	2012-09-14 16:04:57.000000000 +0200
++++ b/ePassportViewer-2.0/pypassport/pki.py	2013-01-19 19:03:58.719238080 +0100
+@@ -184,7 +184,7 @@
+     def getCrl(self):
+         if not os.path.isfile(os.path.join(self._loc, 'crlnumber')):
+             self._openssl._toDisk(os.path.join(self._loc, 'crlnumber'), "01")
+-            self.log("echo '01' > ca/cerlnumber")
++            self.log("echo '01' > " + os.path.join(self._loc, 'crlnumber'))
+         try:
+             crl = self._openssl.genCRL(self.csca, self.cscaKey)
+         except OpenSSLException, msg:
+@@ -196,18 +196,18 @@
+     def _errorHandler(self, msg):
+         if msg.find('newcerts')> 0:
+             os.makedirs(os.path.join(self._loc, 'newcerts'))
+-            self.log("mkdir ca/newcerts")
+-        elif msg.find('ca/index.txt') > 0:
++            self.log("mkdir " + os.path.join(self._loc, 'newcerts'))
++        elif msg.find('index.txt') > 0:
+             self._openssl._toDisk(os.path.join(self._loc, 'index.txt'))
+-            self.log("touch ca/index.txt")
++            self.log("touch " + os.path.join(self._loc, 'index.txt'))
+             self._openssl._toDisk(os.path.join(self._loc, 'index.txt.attr'), "unique_subject = no")
+-            self.log("echo 'unique_subject = no' > ca/index.txt.attr")
+-        elif msg.find('ca/serial') > 0:
++            self.log("echo 'unique_subject = no' > " + os.path.join(self._loc, 'index.txt.attr'))
++        elif msg.find('serial') > 0:
+             self._openssl._toDisk(os.path.join(self._loc, 'serial'), "01")
+-            self.log("echo '01' > ca/serial")
++            self.log("echo '01' > " + os.path.join(self._loc, 'serial'))
+         elif msg.find('openssl.cfg') > 0:
+             self._openssl._toDisk(self._configFile, self._getConfigFile(self._loc))
+-            self.log("Creation of ppenssl.cfg")
++            self.log("Creation of openssl.cfg")
+         else:
+             raise OpenSSLException(msg)
+         self.log(msg)
