@@ -17,3 +17,17 @@ cd /usr/local/lib/mobib-extractor
 ./MOBIB-Extractor.py
 EOF
 chmod 755 config/includes.chroot/usr/local/bin/MOBIB-Extractor
+# icon
+mkdir -p config/includes.chroot/usr/local/share/icons
+cp mobib.png config/includes.chroot/usr/local/share/icons/
+mkdir -p config/includes.chroot/etc/skel/Desktop
+cat > config/includes.chroot/etc/skel/Desktop/mobibextractor.desktop << EOF
+[Desktop Entry]
+Name=MOBIB-Extractor
+Comment=Tool to read MOBIB
+Exec=/usr/local/bin/MOBIB-Extractor
+Icon=/usr/local/share/icons/mobib.png
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;Utility;
+EOF

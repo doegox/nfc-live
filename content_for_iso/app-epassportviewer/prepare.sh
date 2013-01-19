@@ -4,6 +4,7 @@
 
 # epassportviewer 2.0.14
 VERSION=2.0.14
+mkdir -p download
 wget -nc -O download/ePassportViewer-$VERSION.tar.gz "http://ge.tt/api/1/files/6Exz0YO/2/blob?download"
 mkdir -p config/includes.chroot/usr/local/lib
 tar xzf download/ePassportViewer-$VERSION.tar.gz --strip-components=1 -C config/includes.chroot/usr/local/lib ePassportViewer-2.0.14/ePassportViewer-2.0
@@ -86,6 +87,21 @@ cat > config/includes.chroot/usr/local/bin/ePassportViewer << EOF
 python /usr/local/lib/ePassportViewer-2.0/ePassportViewer.py
 EOF
 chmod 755 config/includes.chroot/usr/local/bin/ePassportViewer
+# icon
+mkdir -p config/includes.chroot/usr/local/share/icons
+wget -nc -O download/epassportviewer.png "https://code.google.com/p/epassportviewer/logo"
+cp download/epassportviewer.png config/includes.chroot/usr/local/share/icons/
+mkdir -p config/includes.chroot/etc/skel/Desktop
+cat > config/includes.chroot/etc/skel/Desktop/epassportviewer.desktop << EOF
+[Desktop Entry]
+Name=ePassportViewer
+Comment=Tool to read and check ePassports
+Exec=/usr/local/bin/ePassportViewer
+Icon=/usr/local/share/icons/epassportviewer.png
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;Utility;
+EOF
 
 # JOHN DOE history
 mkdir -p config/includes.chroot/root config/includes.chroot/etc/skel

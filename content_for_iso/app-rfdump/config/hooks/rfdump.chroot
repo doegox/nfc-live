@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mkdir -p /etc/skel/Desktop
+cp /usr/share/applications/rfdump.desktop /etc/skel/Desktop/
