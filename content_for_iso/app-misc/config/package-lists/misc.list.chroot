@@ -4,3 +4,4 @@ socat vbindiff bsdiff
 xserver-xorg-video-all
 opensc
 plotutils
+rsync
