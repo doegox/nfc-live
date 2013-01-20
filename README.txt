@@ -13,6 +13,7 @@ STRUCTURE:
 ==========
 content_for_iso/
           => contains one directory per project/item:
+  000-*       => essential elements
   app-*       => applications
   doc-*       => documentations
   driver-*    => drivers
@@ -96,7 +97,3 @@ Exceptions and special cases:
 * content_for_iso/app-proxmark3fw
   Proxmark firmwares require a toolchain
   See content_for_iso/app-proxmark3fw/howto.txt
-* content_for_iso/doc-readme
-  It's a general readme file that will end up on the Desktop
-* Whatever is put in config/includes.binary
-  will be directly available on the ISO without booting the live system

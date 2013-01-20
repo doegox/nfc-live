@@ -10,18 +10,19 @@ SCL3711 driver             2.11
 pcscd                      1.8.4-1
 pcsc-tools                 1.4.20-1
 libccid                    1.4.7-1
-smartcard_list.txt         2013-01-08 r6499
+smartcard_list.txt         2013-01-20 r6510
 opensc                     0.12.2-3
 python-pyscard             1.6.12.1-3
 RFIDIOt                    2013-01-14 (git 88ec1f6e on repo doegox)
 cardpeek                   0.7.1 (svn r208)
 epassportviewer            2.0.14 + patches
-libnfc                     1.7.0-rc1+ (git 2fbf5a)
+libnfc                     1.7.0-rc2
 nfcutils                   2013-01-16
 libfreeware                2013-01-16 + patch
 rfdump                     1.6-2
 librfid                    r2107 + patches
 proxmark3                  2013-01-16 (svn r649)
++ firmwares & traces in /usr/local/share/proxmark3/
 sniff-pn53x.sh             2011-06-05
 ultralightC.pl JPSZ        2009-10
 MOBIB-Extractor            1.0.6 + patches
@@ -44,7 +45,8 @@ socat, vbindiff, bsdiff, and all basic stuffs: hexedit, od, xxd, ...
 ------------------+---------------------------+
 - ACR122U-PICC    | v#1   v#1,4   v#1 x#1     |
 - Touchatag       | v     v#4     v#2 v   v   |
-- SCL3711         | v     v#4     v   v       |
+- SCL3711 proprio | v#7           v#7 v#7     |
+- SCL3711 ifdnfc  | v#8   v#8         v#8     |
 - Omnikey 5321    | v#3   v#4b    v#5 v       |
 - contact rdrs    | v             v           |
 - PN533           | v#6   v#4,6   v#6 v#6     |
@@ -58,6 +60,8 @@ socat, vbindiff, bsdiff, and all basic stuffs: hexedit, od, xxd, ...
 #5  select second reader to get the RFID interface
 #6  using libnfc via ifdnfc experimental driver,
     only support for ISO14443A-4
+#7  execute "scl3711-pcsc_proprio" first
+#8  execute "scl3711-pcsc_ifdnfc" first
 
 ** via libnfc + PCSC daemon:
 ----------------------------
@@ -75,16 +79,17 @@ socat, vbindiff, bsdiff, and all basic stuffs: hexedit, od, xxd, ...
 ** via libnfc (without PCSC):
 -----------------------------
 
-  Tested          | libnfc RFIDIOt lsnfc libff |
-  Readers         | tools                      |
-------------------+----------------------------+
-- PN531           | v#1    v       v     v     |
-- PN533           | v      v       v     v     |
-- SCL3711         | v#2    v#2     v#2   v#2   |
-- ASK LoGO        | v      v       v     v     |
-------------------+----------------------------+
+  Tested          | libnfc RFIDIOt lsnfc libff mobib |
+  Readers         | tools                            |
+------------------+----------------------------------+
+- PN531           | v#1    v       v     v           |
+- PN533           | v      v       v     v     v#3   |
+- SCL3711         | v#2    v#2     v#2   v#2   v#3   |
+- ASK LoGO        | v      v       v     v     v     |
+------------------+----------------------------------+
 #1  partial working: not in raw modes, e.g. nfc-anticol
-#2  need to stop pcscd first
+#2  execute "scl3711-libnfc" first
+#3  Mobib Basic ok, for regular one use LoGO
 
 ** standalone (without PCSC):
 -----------------------------
