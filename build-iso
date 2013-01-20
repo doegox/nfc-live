@@ -14,6 +14,7 @@ sudo lb clean
 sudo rm -rf config
 
 # bootappend-live: see man live-boot & live-config
+# group dialout: for serial boards such as OpenPCD2
 lb config \
   --clean \
   --cache true \
@@ -26,7 +27,7 @@ lb config \
   --iso-application "$ISO_APPLICATION" \
   --iso-volume "$ISO_VOLUME" \
   --iso-publisher "$ISO_PUBLISHER" \
-  --bootappend-live "boot=live config hostname=$HOSTNAME" \
+  --bootappend-live "hostname=$HOSTNAME user-default-groups=audio,cdrom,dip,floppy,video,plugdev,netdev,powerdev,scanner,bluetooth,fuse,dialout" \
   --apt-recommends false \
   --archive-areas "main contrib non-free" \
   --firmware-chroot true
