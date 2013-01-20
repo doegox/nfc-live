@@ -1,0 +1,201 @@
+help
+---------------------------------------------
+help             This help. Use '<command> help' for details of the following commands:
+          
+data             { Plot window / data buffer manipulation... }          
+exit             Exit program          
+hf               { HF commands... }          
+hw               { Hardware commands... }          
+lf               { LF commands... }          
+quit             Quit program          
+
+data help
+---------------------------------------------
+help             This help          
+amp              Amplify peaks          
+askdemod         <0|1> -- Attempt to demodulate simple ASK tags          
+autocorr         <window length> -- Autocorrelation over window          
+bitsamples       Get raw samples as bitstring          
+bitstream        [clock rate] -- Convert waveform into a bitstream          
+buffclear        Clear sample buffer and graph window          
+dec              Decimate samples          
+detectclock      Detect clock rate          
+fskdemod         Demodulate graph window as a HID FSK          
+grid             <x> <y> -- overlay grid on graph window, use zero value to turn off either          
+hexsamples       <blocks> [<offset>] -- Dump big buffer as hex bytes          
+hide             Hide graph window          
+hpf              Remove DC offset from trace          
+load             <filename> -- Load trace (to graph window          
+ltrim            <samples> -- Trim samples from left of trace          
+mandemod         [i] [clock rate] -- Manchester demodulate binary stream (option 'i' to invert output)          
+manmod           [clock rate] -- Manchester modulate a binary stream          
+norm             Normalize max/min to +/-500          
+plot             Show graph window (hit 'h' in window for keystroke help)          
+samples          [128 - 16000] -- Get raw samples for graph window          
+save             <filename> -- Save trace (from graph window)          
+scale            <int> -- Set cursor display scale          
+threshold        <threshold> -- Maximize/minimize every value in the graph window depending on threshold          
+zerocrossings    Count time between zero-crossings          
+
+hw help
+---------------------------------------------
+help             This help          
+detectreader     ['l'|'h'] -- Detect external reader field (option 'l' or 'h' to limit to LF or HF)          
+fpgaoff          Set FPGA off          
+lcd              <HEX command> <count> -- Send command/data to LCD          
+lcdreset         Hardware reset LCD          
+readmem          [address] -- Read memory at decimal address from flash          
+reset            Reset the Proxmark3          
+setlfdivisor     <19 - 255> -- Drive LF antenna at 12Mhz/(divisor+1)          
+setmux           <loraw|hiraw|lopkd|hipkd> -- Set the ADC mux to a specific value          
+tune             Measure antenna tuning          
+version          Show version inforation about the connected Proxmark          
+
+lf help
+---------------------------------------------
+help             This help          
+cmdread          <off period> <'0' period> <'1' period> <command> ['h'] -- Modulate LF reader field to send command before read (all periods in microseconds) (option 'h' for 134)          
+em4x             { EM4X RFIDs... }          
+flexdemod        Demodulate samples for FlexPass          
+hid              { HID RFIDs... }          
+indalademod      ['224'] -- Demodulate samples for Indala 64 bit UID (option '224' for 224 bit)          
+indalaclone      <UID> ['l']-- Clone Indala to T55x7 (tag must be in antenna)(UID in HEX)(option 'l' for 224 UID          
+read             ['h'] -- Read 125/134 kHz LF ID-only tag (option 'h' for 134)          
+sim              [GAP] -- Simulate LF tag from buffer with optional GAP (in microseconds)          
+simbidir         Simulate LF tag (with bidirectional data transmission between reader and tag)          
+simman           <Clock> <Bitstream> [GAP] Simulate arbitrary Manchester LF tag          
+ti               { TI RFIDs... }          
+hitag            { Hitag tags and transponders... }          
+vchdemod         ['clone'] -- Demodulate samples for VeriChip          
+t55xx            { T55xx RFIDs... }          
+
+lf em4x help
+---------------------------------------------
+help             This help          
+em410xread       [clock rate] -- Extract ID from EM410x tag          
+em410xsim        <UID> -- Simulate EM410x tag          
+em410xwatch      Watches for EM410x tags          
+em410xwrite      <UID> <'0' T5555> <'1' T55x7> -- Write EM410x UID to T5555(Q5) or T55x7 tag          
+em4x50read       Extract data from EM4x50 tag          
+
+lf hid help
+---------------------------------------------
+help             This help          
+demod            Demodulate HID Prox Card II (not optimal)          
+fskdemod         Realtime HID FSK demodulator          
+sim              <ID> -- HID tag simulator          
+clone            <ID> ['l'] -- Clone HID to T55x7 (tag must be in antenna)(option 'l' for 84bit ID)          
+
+lf ti help
+---------------------------------------------
+help             This help          
+demod            Demodulate raw bits for TI-type LF tag          
+read             Read and decode a TI 134 kHz tag          
+write            Write new data to a r/w TI 134 kHz tag          
+
+lf t55xx help
+---------------------------------------------
+help             This help          
+readblock        <Block> -- Read T55xx block data (page 0)          
+readblockPWD     <Block> <Password> -- Read T55xx block data in password mode(page 0)          
+writeblock       <Data> <Block> -- Write T55xx block data (page 0)          
+writeblockPWD    <Data> <Block> <Password> -- Write T55xx block data in password mode(page 0)          
+readtrace        Read T55xx traceability data (page 1)          
+
+hf help
+---------------------------------------------
+help             This help          
+14a              { ISO14443A RFIDs... }          
+14b              { ISO14443B RFIDs... }          
+15               { ISO15693 RFIDs... }          
+epa              { German Identification Card... }          
+legic            { LEGIC RFIDs... }          
+iclass           { ICLASS RFIDs... }          
+mf               { MIFARE RFIDs... }          
+tune             Continuously measure HF antenna tuning          
+
+hf 14a help
+---------------------------------------------
+help             This help          
+list             List ISO 14443a history          
+reader           Act like an ISO14443 Type A reader          
+cuids            <n> Collect n>0 ISO14443 Type A UIDs in one go          
+sim              <UID> -- Fake ISO 14443a tag          
+snoop            Eavesdrop ISO 14443 Type A          
+
+hf 14b help
+---------------------------------------------
+help             This help          
+demod            Demodulate ISO14443 Type B from tag          
+list             List ISO 14443 history          
+read             Read HF tag (ISO 14443)          
+sim              Fake ISO 14443 tag          
+simlisten        Get HF samples as fake tag          
+snoop            Eavesdrop ISO 14443          
+sri512read       <int> -- Read contents of a SRI512 tag          
+srix4kread       <int> -- Read contents of a SRIX4K tag          
+
+hf 15 help
+---------------------------------------------
+help             This help          
+demod            Demodulate ISO15693 from tag          
+read             Read HF tag (ISO 15693)          
+record           Record Samples (ISO 15693)          
+reader           Act like an ISO15693 reader          
+sim              Fake an ISO15693 tag          
+cmd              Send direct commands to ISO15693 tag          
+findafi          Brute force AFI of an ISO15693 tag          
+dumpmemory       Read all memory pages of an ISO15693 tag          
+
+hf epa help
+---------------------------------------------
+help             This help          
+cnonces          <m> <n> <d> Acquire n>0 encrypted PACE nonces of size m>0 with d sec pauses          
+
+hf legic help
+---------------------------------------------
+help             This help          
+decode           Display deobfuscated and decoded LEGIC RF tag data (use after hf legic reader)          
+reader           [offset [length]] -- read bytes from a LEGIC card          
+save             <filename> [<length>] -- Store samples          
+load             <filename> -- Restore samples          
+sim              [phase drift [frame drift [req/resp drift]]] Start tag simulator (use after load or read)          
+write            <offset> <length> -- Write sample buffer (user after load or read)          
+fill             <offset> <length> <value> -- Fill/Write tag with constant value          
+
+hf iclass help
+---------------------------------------------
+help             This help          
+list             List iClass history          
+snoop            Eavesdrop iClass communication          
+sim              Simulate iClass tag          
+reader           Read an iClass tag          
+
+hf mf help
+---------------------------------------------
+help             This help          
+dbg              Set default debug mode          
+rdbl             Read MIFARE classic block          
+rdsc             Read MIFARE classic sector          
+dump             Dump MIFARE classic tag to binary file          
+restore          Restore MIFARE classic binary file to BLANK tag          
+wrbl             Write MIFARE classic block          
+chk              Test block keys          
+mifare           Read parity error messages. param - <used card nonce>          
+nested           Test nested authentication          
+sniff            Sniff card-reader communication          
+sim              Simulate MIFARE card          
+eclr             Clear simulator memory block          
+eget             Get simulator memory block          
+eset             Set simulator memory block          
+eload            Load from file emul dump          
+esave            Save to file emul dump          
+ecfill           Fill simulator memory with help of keys from simulator          
+ekeyprn          Print keys from simulator memory          
+csetuid          Set UID for magic Chinese card          
+csetblk          Write block into magic Chinese card          
+cgetblk          Read block from magic Chinese card          
+cgetsc           Read sector from magic Chinese card          
+cload            Load dump into magic Chinese card          
+csave            Save dump from magic Chinese card into file or emulator          
+

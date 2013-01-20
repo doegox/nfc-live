@@ -26,5 +26,9 @@ New firmware:
 bootrom/obj/bootrom.elf
 armsrc/obj/fullimage.elf
 => e.g.:
-config/includes.chroot/root/proxmark3/firmware_r638/bootrom.elf
-config/includes.chroot/root/proxmark3/firmware_r638/fullimage.elf
+config/includes.chroot/usr/local/share/proxmark3/firmware_r649/bootrom.elf
+config/includes.chroot/usr/local/share/proxmark3/firmware_r649/fullimage.elf
+
+New man:
+--------
+config/includes.binary/nfc-doc/applications/proxmark3/proxmark3-help-r649.txt
