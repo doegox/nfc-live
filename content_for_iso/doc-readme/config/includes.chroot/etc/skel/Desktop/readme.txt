@@ -13,25 +13,25 @@ libccid                    1.4.7-1
 smartcard_list.txt         2013-01-08 r6499
 opensc                     0.12.2-3
 python-pyscard             1.6.12.1-3
-RFIDIOt                    2013-01-14 (git 0c8aece5)
+RFIDIOt                    2013-01-14 (git 88ec1f6e on repo doegox)
 cardpeek                   0.7.1 (svn r208)
-epassportviewer            1.0 (svn r16)
-pypassport                 1.0 (svn r88)
+epassportviewer            2.0.14 + patches
 libnfc                     1.7.0-rc1+ (git 2fbf5a)
 nfcutils                   2013-01-16
-libfreeware                2013-01-16
+libfreeware                2013-01-16 + patch
 rfdump                     1.6-2
-proxmark3                  2012-12-07 (svn r638)
+librfid                    r2107 + patches
+proxmark3                  2013-01-16 (svn r649)
 sniff-pn53x.sh             2011-06-05
 ultralightC.pl JPSZ        2009-10
-MOBIB-Extractor            1.0.6+ (with libnfc support)
+MOBIB-Extractor            1.0.6 + patches
 
 Development tools and dependencies are installed so you can easily
 fetch the latest versions and compile them.
 
 Are also installed:
-openssh, openssl, cu, mc, evince, screen, leafpad, iceweasel, socat
-vbindiff, bsdiff, and all basic stuffs: hexedit, od, xxd, ...
+openssh, sshfs, rsync, openssl, cu, mc, evince, screen, leafpad, iceweasel,
+socat, vbindiff, bsdiff, and all basic stuffs: hexedit, od, xxd, ...
 
 * Supported readers and software
 ================================
@@ -40,15 +40,15 @@ vbindiff, bsdiff, and all basic stuffs: hexedit, od, xxd, ...
 ----------------------------
 
   Tested          | PCSC  RFIDIOt cpk ePV ulc |
-  Readers         | tools !#4                 |
+  Readers         | tools                     |
 ------------------+---------------------------+
-- ACR122U-PICC !#1| v     v       v   x       |
-- Touchatag       | v     v       v#2 v   v   |
-- SCL3711         | v     v       v   v       |
+- ACR122U-PICC    | v#1   v#1,4   v#1 x#1     |
+- Touchatag       | v     v#4     v#2 v   v   |
+- SCL3711         | v     v#4     v   v       |
 - Omnikey 5321    | v#3   v#4b    v#5 v       |
 - contact rdrs    | v             v           |
-- PN533        !#6| v     v       v   v       |
-- ASK LoGO     !#6| v     v       v   v       |
+- PN533           | v#6   v#4,6   v#6 v#6     |
+- ASK LoGO        | v#6   v#4,6   v#6 v#6     |
 ------------------+---------------------------+
 #1  unstable, reader disconnects regularly
 #2  by default it sees the internal SAM slot
@@ -65,8 +65,8 @@ vbindiff, bsdiff, and all basic stuffs: hexedit, od, xxd, ...
   Tested          | libnfc RFIDIOt lsnfc libff |
   Readers         | tools                      |
 ------------------+----------------------------+
-- ACR122U-PICC !#1| v      !#2     v     v     |
-- Touchatag       | v      !#2     v     v     |
+- ACR122U-PICC    | v#1    #1,2    v#1   v#1   |
+- Touchatag       | v      #2      v     v     |
 - SCL3711         | only without pcsc see below|
 ------------------+----------------------------+
 #1  unstable, reader disconnects regularly
@@ -78,26 +78,25 @@ vbindiff, bsdiff, and all basic stuffs: hexedit, od, xxd, ...
   Tested          | libnfc RFIDIOt lsnfc libff |
   Readers         | tools                      |
 ------------------+----------------------------+
-- PN531           | v#1    !#2     v     v     |
-- PN533           | v      !#2     v     v     |
-- SCL3711         | v#3    !#2,3   v#3   v#3   |
-- ASK LoGO        | v      !#2     v     v     |
+- PN531           | v#1    v       v     v     |
+- PN533           | v      v       v     v     |
+- SCL3711         | v#2    v#2     v#2   v#2   |
+- ASK LoGO        | v      v       v     v     |
 ------------------+----------------------------+
 #1  partial working: not in raw modes, e.g. nfc-anticol
-#2  buggy, use option: -f 0
-#3  need to stop pcscd first
+#2  need to stop pcscd first
 
 ** standalone (without PCSC):
 -----------------------------
 
-  Tested          | RFIDIOt serial rfdump |
-  Readers         |                       |
-------------------+-----------------------+
-- Omnikey 5321    |                       |
-- ACG LF          |  v#2    v#3    v#4    |
-- Frosch          |  v#5                  |
-- openpicc        |         v#6           |
-------------------+-----------------------+
+  Tested          | librfid RFIDIOt serial rfdump |
+  Readers         |                               |
+------------------+-------------------------------+
+- Omnikey 5321    | v#1                           |
+- ACG LF          |          v#2    v#3    v#4    |
+- Frosch          |          v#5                  |
+- openpicc        |                 v#6           |
+------------------+-------------------------------+
 #1  need to stop pcscd first
 #2  use option: -R READER_ACG -s 57600
     baudrate may differ
@@ -112,10 +111,11 @@ vbindiff, bsdiff, and all basic stuffs: hexedit, od, xxd, ...
 
 * Documentation
 ===============
-see folder "docs" on Desktop
+see folder "nfc-doc" on Desktop
 - PCSC specs
 - readers functional datasheets
 - tools documentations
 - mifare specs
 - and more...
+nfc-doc is also directly accessible without booting the ISO
 
