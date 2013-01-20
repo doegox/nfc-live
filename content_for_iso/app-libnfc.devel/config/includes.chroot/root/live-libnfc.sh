@@ -1,13 +1,10 @@
 #!/bin/bash
 
-REVISION=4576bad36972b8f19e6e330355d95367a4e18400
-#!!+merge see below
+REVISION=libnfc-1.7.0-rc2
 git clone http://code.google.com/p/libnfc/ libnfc-dev
 
 cd libnfc-dev
 git checkout $REVISION
-# TEMP merge test_user_defined_device_optional:
-git merge --no-commit 04a7d2a3ba85c01f1c9f28a0626318e6bbf7c3b0
 
 debian/rules binary
 mkdir -p /tmp/TRANSFER/app-libnfc.generated/config/includes.chroot/etc/modprobe.d
