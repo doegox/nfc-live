@@ -1,3 +1,13 @@
+* Basics
+========
+user: user
+password: live
+
+root access via sudo:
+$ sudo su -
+
+Once ISO is booted, this directory is accessible via /live/image/
+
 * Non-US keyboard?
 ==================
   menu -> settings -> keyboard -> layout 
@@ -122,5 +132,4 @@ see folder "nfc-doc" on Desktop
 - tools documentations
 - mifare specs
 - and more...
-nfc-doc is also directly accessible without booting the ISO
 

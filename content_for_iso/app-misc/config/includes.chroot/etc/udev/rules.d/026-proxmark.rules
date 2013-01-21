@@ -1,2 +1,0 @@
-#Proxmark3
-SUBSYSTEM=="usb", ATTR{idVendor}=="9ac4", ATTR{idProduct}=="4b8f", MODE="0660", GROUP="plugdev"
