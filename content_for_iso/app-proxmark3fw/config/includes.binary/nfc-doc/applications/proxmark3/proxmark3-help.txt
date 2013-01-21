@@ -93,6 +93,14 @@ demod            Demodulate raw bits for TI-type LF tag
 read             Read and decode a TI 134 kHz tag          
 write            Write new data to a r/w TI 134 kHz tag          
 
+lf hitag help
+---------------------------------------------
+help             This help          
+list             List Hitag trace history          
+reader           Act like a Hitag Reader          
+sim              Simulate Hitag transponder          
+snoop            Eavesdrop Hitag communication          
+
 lf t55xx help
 ---------------------------------------------
 help             This help          
