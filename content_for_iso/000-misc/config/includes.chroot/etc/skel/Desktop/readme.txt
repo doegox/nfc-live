@@ -1,1 +1,1 @@
-/live/image/readme.txt
+/lib/live/mount/medium/readme.txt
