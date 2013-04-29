@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REVISION=libnfc-1.7.0-rc2
+REVISION=41ec6d49f6f21e96412f948a26e7ff368beb9d28
 git clone http://code.google.com/p/libnfc/ libnfc-dev
 
 cd libnfc-dev
