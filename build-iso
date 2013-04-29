@@ -22,6 +22,7 @@ sudo rm -rf config
 lb config \
   --clean \
   --cache true \
+  --zsync false \
   --binary-images $SUPPORT \
   --mode debian \
   --distribution $DISTRO \
