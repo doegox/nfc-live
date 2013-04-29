@@ -20,19 +20,20 @@ SCL3711 driver             2.11
 pcscd                      1.8.4-1
 pcsc-tools                 1.4.20-1
 libccid                    1.4.7-1
-smartcard_list.txt         2013-01-20 r6510
+smartcard_list.txt         2013-04-23 r6613
 opensc                     0.12.2-3
 python-pyscard             1.6.12.1-3
-RFIDIOt                    2013-01-14 (git 88ec1f6e on repo doegox)
-cardpeek                   0.7.1 (svn r208)
+RFIDIOt                    2013-01-28
+cardpeek                   0.7.2 (svn r334)
 epassportviewer            2.0.14 + patches
-libnfc                     1.7.0-rc2
-nfcutils                   2013-01-16
-libfreeware                2013-01-16 + patch
+libnfc                     1.7.0-rc7 (git 2013-04-24)
+nfcutils                   2013-04-05
+libfreeware                2013-04-29
 rfdump                     1.6-2
 librfid                    r2107 + patches
-proxmark3                  2013-01-16 (svn r649)
+proxmark3                  2013-04-26 (svn r708)
 + firmwares & traces in /usr/local/share/proxmark3/
++ flasher_old (r649) to upgrade bootloader
 sniff-pn53x.sh             2011-06-05
 ultralightC.pl JPSZ        2009-10
 MOBIB-Extractor            1.0.6 + patches
