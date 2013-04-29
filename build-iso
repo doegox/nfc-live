@@ -1,6 +1,5 @@
 #!/bin/bash
 
-HOSTNAME="nfc-live"
 ISO_APPLICATION="Debian Live NFC"
 ISO_VOLUME="Debian live NFC $(date +%Y%m%d)"
 ISO_PUBLISHER="https://code.google.com/p/nfc-live"
@@ -32,7 +31,6 @@ lb config \
   --iso-application "$ISO_APPLICATION" \
   --iso-volume "$ISO_VOLUME" \
   --iso-publisher "$ISO_PUBLISHER" \
-  --bootappend-live "hostname=$HOSTNAME user-default-groups=audio,cdrom,dip,floppy,video,plugdev,netdev,powerdev,scanner,bluetooth,fuse,dialout" \
   --apt-recommends $APTRECOMMENDS \
   --archive-areas "main contrib non-free" \
   --firmware-chroot $FIRMWARECHROOT
