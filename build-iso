@@ -8,6 +8,10 @@ SUPPORT=iso-hybrid
 DISTRO=wheezy
 ARCH=i386
 MIRROR="http://ftp.be.debian.org/debian/"
+# Beware if false, some packages have to be re-introduced, e.g. user-setup
+# cf http://live.debian.net/manual/3.x/html/live-manual.en.html#452
+APTRECOMMENDS=true
+FIRMWARECHROOT=true
 
 cd live || exit 1
 sudo lb clean
@@ -28,9 +32,9 @@ lb config \
   --iso-volume "$ISO_VOLUME" \
   --iso-publisher "$ISO_PUBLISHER" \
   --bootappend-live "hostname=$HOSTNAME user-default-groups=audio,cdrom,dip,floppy,video,plugdev,netdev,powerdev,scanner,bluetooth,fuse,dialout" \
-  --apt-recommends false \
+  --apt-recommends $APTRECOMMENDS \
   --archive-areas "main contrib non-free" \
-  --firmware-chroot true
+  --firmware-chroot $FIRMWARECHROOT
 
 sudo rsync -av ../content_for_iso/@config/ config
 sudo chmod +x config/includes.chroot/usr/local/bin/*
