@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REVISION=1116
+REVISION=1128
 
 # nfcutils
 svn export -r $REVISION http://nfc-tools.googlecode.com/svn/trunk/nfcutils nfcutils-dev
