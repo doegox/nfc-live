@@ -32,3 +32,17 @@ mkdir -p ../@config
 rsync -av config/ ../@config
 EOF
 chmod 755 /tmp/TRANSFER/app-proxmark3.generated/add.sh
+cd ..
+
+# Limited support for Proxmarks with old HID bootrom
+REVISION=649
+svn export -r $REVISION http://proxmark3.googlecode.com/svn/trunk/ proxmark3-old-dev
+cd proxmark3-old-dev
+make client
+cp -a client/flasher /tmp/TRANSFER/app-proxmark3.generated/config/includes.chroot/usr/local/bin/flasher-old
+# user rights for proxmarks with old HID bootrom
+mkdir -p /tmp/TRANSFER/app-proxmark3.generated/config/includes.chroot/etc/udev/rules.d
+cat > /tmp/TRANSFER/app-proxmark3.generated/config/includes.chroot/etc/udev/rules.d/026-proxmark.rules <<EOF
+#Proxmark3
+SUBSYSTEM=="usb", ATTR{idVendor}=="9ac4", ATTR{idProduct}=="4b8f", MODE="0660", GROUP="plugdev"
+EOF
