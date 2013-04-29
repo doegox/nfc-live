@@ -1,0 +1,3 @@
+rsync uuid-runtime
+cpio gnu-fdisk
+user-setup sudo
