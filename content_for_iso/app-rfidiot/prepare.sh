@@ -1,10 +1,13 @@
 #!/bin/bash
 
-REVISION=88ec1f6ea593de3c0ffb23f38a0216ed23ef7a1b
+REVISION=66584be0f127da4dfa6bc9dc80f77884b9d37362
 
-git clone --depth 1 --branch devel https://github.com/doegox/RFIDIOt.git
+git clone --depth 1 --branch master https://github.com/AdamLaurie/RFIDIOt.git
 cd RFIDIOt
 git checkout $REVISION
+# Little patch to increase default libnfc timeout
+#sed -i '/transceive_bytes/s/-1/4000/' rfidiot/pynfc.py
+
 mkdir -p ../config/includes.chroot
 python setup.py install --root ../config/includes.chroot
 cd ..
