@@ -6,7 +6,7 @@ REVISION=1128
 svn export -r $REVISION http://nfc-tools.googlecode.com/svn/trunk/nfcutils nfcutils-dev
 cd nfcutils-dev
 autoreconf -vis
-debian/rules binary
+dpkg-buildpackage -uc -us -b -d
 cd ..
 mkdir -p /tmp/TRANSFER/app-nfcutils.generated/config/packages.chroot
 cp nfcutils*.deb /tmp/TRANSFER/app-nfcutils.generated/config/packages.chroot
