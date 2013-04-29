@@ -1,9 +1,10 @@
 #!/bin/bash
 
-REVISION=208
+REVISION=334
 
 svn export -r $REVISION http://cardpeek.googlecode.com/svn/trunk/ cardpeek-dev
 cd cardpeek-dev
+autoreconf -vis
 ./configure
 make
 mkdir -p /tmp/TRANSFER/app-cardpeek.generated/config/includes.chroot/usr/local/bin
