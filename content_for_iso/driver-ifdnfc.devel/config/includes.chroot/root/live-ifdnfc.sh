@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REVISION=fe7faf7a74769976f0b034578beffde39f74f8e6
+REVISION=c25902fe431c
 
 git clone http://code.google.com/p/ifdnfc/ ifdnfc-dev
 cd ifdnfc-dev
