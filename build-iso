@@ -36,5 +36,12 @@ lb config \
   --firmware-chroot $FIRMWARECHROOT
 
 sudo rsync -av ../content_for_iso/@config/ config
+sudo chown -R root:root config/includes.binary
+sudo find config/includes.binary -type d -exec chmod 755 {} \;
+sudo find config/includes.binary -type f -exec chmod 644 {} \;
+sudo chown -R root:root config/includes.chroot
+sudo find config/includes.chroot -type d -exec chmod 755 {} \;
+sudo find config/includes.chroot -type f -exec chmod 644 {} \;
 sudo chmod +x config/includes.chroot/usr/local/bin/*
+sudo chmod +x config/includes.chroot/root/*.sh
 sudo lb build
