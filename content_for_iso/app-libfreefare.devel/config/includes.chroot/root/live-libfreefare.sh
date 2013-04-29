@@ -7,7 +7,7 @@ cd libfreefare-dev
 git checkout $REVISION
 
 autoreconf -vis
-debian/rules binary
+dpkg-buildpackage -uc -us -b
 cd ..
 mkdir -p /tmp/TRANSFER/app-libfreefare.generated/config/package-lists
 echo "libssl1.0.0" > /tmp/TRANSFER/app-libfreefare.generated/config/package-lists/libfreefare-deps.list.chroot
