@@ -10,7 +10,7 @@ git checkout $REVISION
 # for safer support through virtualbox
 sed -i '/timeout/s/350/3500/g' libnfc/chips/pn53x.c
 
-debian/rules binary
+dpkg-buildpackage -uc -us -b
 mkdir -p /tmp/TRANSFER/app-libnfc.generated/config/includes.chroot/etc/modprobe.d
 cp contrib/linux/blacklist-libnfc.conf /tmp/TRANSFER/app-libnfc.generated/config/includes.chroot/etc/modprobe.d
 mkdir -p /tmp/TRANSFER/app-libnfc.generated/config/includes.chroot/usr/local/bin/
